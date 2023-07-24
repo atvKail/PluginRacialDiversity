@@ -4,6 +4,6 @@ main: racialdiversity.racialdiversity.main
 api-version: 1.16
 author: 4e1owek
 commands:
-  setRacial:
+  racial:
     name: /racial
     use: /racial <humans|elves|orcs|gnomes>

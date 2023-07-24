@@ -1,24 +1,33 @@
-Racial:
+racial:
  elves:
-  effect:
+  effects:
    - NIGHT_VISION
    - JUMP
  humans:
-  effect:
+  effects:
    - SPEED
  orcs:
-  effect:
+  effects:
    - STRENGTH
  gnomes:
-  effect:
+  effects:
    - LUCK
  gods:
-  effect:
+  effects:
    - INSTANT_HEAL
    - LUCK
    - WATER_BREATHING
  demons:
-  effect:
+  effects:
    - STRENGTH
    - REGEN
    - INVISIBILITY
+players:
+ elves:
+  - honses
+ orcs:
+ gnomes:
+ humans:
+ gods:
+ demons:
+

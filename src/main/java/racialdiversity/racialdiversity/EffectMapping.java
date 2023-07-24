@@ -1,12 +1,8 @@
 package racialdiversity.racialdiversity;
 
-import org.bukkit.Effect;
-import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class EffectMapping {
     public static  HashMap<String, PotionType> MapEffect = new HashMap<>();

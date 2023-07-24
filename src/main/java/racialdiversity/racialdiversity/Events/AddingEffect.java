@@ -1,35 +1,47 @@
 package racialdiversity.racialdiversity.Events;
 
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.potion.PotionEffect;
-import racialdiversity.racialdiversity.EffectMapping;
-import racialdiversity.racialdiversity.main;
+
 import org.bukkit.Location;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import racialdiversity.racialdiversity.main;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerMoveEvent;
+
+import java.util.List;
 
 public class AddingEffect implements Listener {
-    main plugin = new main();
-    FileConfiguration config = plugin.config;
+    private final FileConfiguration config = main.getPlugin(main.class).config;
+    private final List<String> racial = config.getStringList("players:");
 
     @EventHandler
-    public void PlayerMoveEvent(PlayerMoveEvent player, Location from, Location to) {
+    void MovePlayer(PlayerMoveEvent player){
         Player pl = player.getPlayer();
-        Object[] args = config.getConfigurationSection("Racial").getKeys(false).toArray();
-        try {
-            for (int i = 0; i < args.length; i++) {
-                if (plugin.GroupPlayers.getList("players:" + args[i]).contains(pl.getName())) {
-                    Object[] effects = config.getConfigurationSection("Racial:" + args[i] + ":effect").getKeys(false).toArray();
-                    for (Object v : effects) {
-                        pl.addPotionEffect(new PotionEffect(EffectMapping.MapEffect.get(v.toString()).getEffectType(),
-                                1000, 10, true));
-                    }
-                }
+        AddEffectPlayer(pl);
+    }
+    private String CheckPlayerInConfig(Player pl) {
+        String p = pl.getName();
+        for (String v : racial) {
+            if (config.getStringList("players:" + v).contains(p)) {
+                return v;
             }
-        } catch (Exception e) {
-            pl.sendMessage("Exception");
         }
+        return null;
+    }
+
+    public boolean AddEffectPlayer(Player pl){
+        String verdict = CheckPlayerInConfig(pl);
+        if(verdict != null){
+            List<String> effects = config.getStringList("racial:" + verdict + "effects:");
+            for (String nameEffect : effects){
+                PotionEffect effect = new PotionEffect(PotionEffectType.getByName(nameEffect), 10000, 7);
+                pl.addPotionEffect(effect);
+            }
+            return true;
+        }
+        return false;
     }
 }
