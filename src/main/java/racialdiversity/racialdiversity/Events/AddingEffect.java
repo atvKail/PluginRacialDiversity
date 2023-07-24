@@ -3,9 +3,12 @@ package racialdiversity.racialdiversity.Events;
 
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 import racialdiversity.racialdiversity.main;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,7 +21,7 @@ public class AddingEffect implements Listener {
     private final List<String> racial = config.getStringList("players:");
 
     @EventHandler
-    void MovePlayer(PlayerMoveEvent player){
+    public void OnRespawn(PlayerRespawnEvent player){
         Player pl = player.getPlayer();
         AddEffectPlayer(pl);
     }

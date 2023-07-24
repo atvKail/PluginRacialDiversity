@@ -24,9 +24,6 @@ public class SetRacial implements CommandExecutor {
             if (racial.contains(args[0])) {
                 if (verdict != null) {
                     SwapRacialInConfig("players:" + verdict, "players:" + args[0], pl.getName());
-                } else {
-                    config.set("players:" + args[0], pl.getName());
-                    plugin.saveDefaultConfig();
                 }
             }
         }
@@ -44,8 +41,12 @@ public class SetRacial implements CommandExecutor {
     }
 
     private void SwapRacialInConfig(String begin, String end, String playerName){
-        config.set(begin, config.getStringList(begin).remove(playerName));
-        config.set(end, config.getStringList(end).add(playerName));
+        List<String> tm1 = config.getStringList(begin);
+        List<String> tm2 = config.getStringList(end);
+        tm1.remove(playerName);
+        tm2.add(playerName);
+        config.set(begin, (String[])tm1.toArray());
+        config.set(end, (String[])tm2.toArray());
         plugin.saveDefaultConfig();
     }
 }
