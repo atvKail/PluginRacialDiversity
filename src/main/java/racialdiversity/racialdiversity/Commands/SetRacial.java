@@ -14,16 +14,17 @@ import java.util.List;
 public class SetRacial implements CommandExecutor {
     private final Plugin plugin = main.getPlugin(main.class);
     private final FileConfiguration config = plugin.getConfig();
-    private final List<String> racial = config.getStringList("players:");
+    private final List<String> racial = config.getStringList("info");
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (sender instanceof Player && args.length == 1 && command.getName().equalsIgnoreCase("racial")) {
+        if ((Player) sender != null && args.length == 1 && command.getName().equalsIgnoreCase("racial")) {
             Player pl = (Player) sender;
             String verdict = CheckPlayerInConfig(pl);
+            plugin.getLogger().info(verdict + "  " + args[0]);
             if (racial.contains(args[0])) {
                 if (verdict != null) {
-                    SwapRacialInConfig("players:" + verdict, "players:" + args[0], pl.getName());
+                    SwapRacialInConfig("players." + verdict, "players." + args[0], pl.getName());
                 }
             }
         }
@@ -33,7 +34,7 @@ public class SetRacial implements CommandExecutor {
     private String CheckPlayerInConfig(Player pl) {
         String p = pl.getName();
         for (String v : racial) {
-            if (config.getStringList("players:" + v).contains(p)) {
+            if (config.getStringList("players." + v).contains(p)) {
                 return v;
             }
         }
@@ -45,8 +46,8 @@ public class SetRacial implements CommandExecutor {
         List<String> tm2 = config.getStringList(end);
         tm1.remove(playerName);
         tm2.add(playerName);
-        config.set(begin, (String[])tm1.toArray());
-        config.set(end, (String[])tm2.toArray());
-        plugin.saveDefaultConfig();
+        config.set(begin, tm1);
+        config.set(end, tm2);
+        plugin.saveConfig();
     }
 }

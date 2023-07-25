@@ -30,4 +30,10 @@ players:
  humans:
  gods:
  demons:
-
+info:
+ - elves
+ - orcs
+ - gnomes
+ - humans
+ - gods
+ - demons
