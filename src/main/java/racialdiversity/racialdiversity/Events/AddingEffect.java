@@ -3,7 +3,7 @@ package racialdiversity.racialdiversity.Events;
 
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
@@ -21,7 +21,7 @@ public class AddingEffect implements Listener {
     private final List<String> race = config.getStringList("info");
 
     @EventHandler
-    public void OnMoved(PlayerMoveEvent player){
+    public void OnRespawn(PlayerRespawnEvent player){
         Player pl = player.getPlayer();
         AddEffectPlayer(pl);
     }
@@ -45,7 +45,7 @@ public class AddingEffect implements Listener {
                     return false;
                 }
                 PotionEffect effect = new PotionEffect(
-                        PotionEffectType.getByName(nameEffect), 10000, 1, false, false);
+                        PotionEffectType.getByName(nameEffect), 10000000, 1, false, false);
                 pl.addPotionEffect(effect);
             }
             return true;

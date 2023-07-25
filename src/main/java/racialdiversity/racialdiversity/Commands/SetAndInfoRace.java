@@ -8,6 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
+import racialdiversity.racialdiversity.Events.AddingEffect;
 import racialdiversity.racialdiversity.main;
 
 import java.util.List;
@@ -51,6 +52,7 @@ public class SetAndInfoRace implements CommandExecutor {
                     tmp.add(pl.getName());
                     config.set("players." + args[0], tmp);
                 }
+                new AddingEffect().AddEffectPlayer(pl);
                 return true;
             }
         }
