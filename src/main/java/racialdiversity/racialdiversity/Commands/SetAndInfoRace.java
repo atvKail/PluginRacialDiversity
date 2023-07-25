@@ -4,7 +4,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
@@ -16,8 +15,7 @@ import java.util.List;
 
 public class SetAndInfoRace implements CommandExecutor {
     private final Plugin plugin = main.getPlugin(main.class);
-    private final FileConfiguration config = plugin.getConfig();
-    private final List<String> race = config.getStringList("info");
+    private final List<String> race = plugin.getConfig().getStringList("info");
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -48,9 +46,9 @@ public class SetAndInfoRace implements CommandExecutor {
                     SwapRacialInConfig("players." + verdict, "players." + args[0], pl.getName());
                 }
                 else {
-                    List<String> tmp = config.getStringList("players." + args[0]);
+                    List<String> tmp = plugin.getConfig().getStringList("players." + args[0]);
                     tmp.add(pl.getName());
-                    config.set("players." + args[0], tmp);
+                    plugin.getConfig().set("players." + args[0], tmp);
                 }
                 new AddingEffect().AddEffectPlayer(pl);
                 return true;
@@ -62,7 +60,7 @@ public class SetAndInfoRace implements CommandExecutor {
     private String CheckPlayerInConfig(Player pl) {
         String p = pl.getName();
         for (String v : race) {
-            if (config.getStringList("players." + v).contains(p)) {
+            if (plugin.getConfig().getStringList("players." + v).contains(p)) {
                 return v;
             }
         }
@@ -70,12 +68,11 @@ public class SetAndInfoRace implements CommandExecutor {
     }
 
     private void SwapRacialInConfig(String begin, String end, String playerName){
-        List<String> tm1 = config.getStringList(begin);
-        List<String> tm2 = config.getStringList(end);
+        List<String> tm1 = plugin.getConfig().getStringList(begin);
+        List<String> tm2 = plugin.getConfig().getStringList(end);
         tm1.remove(playerName);
         tm2.add(playerName);
-        config.set(begin, tm1);
-        config.set(end, tm2);
-        plugin.saveConfig();
+        plugin.getConfig().set(begin, tm1);
+        plugin.getConfig().set(end, tm2);
     }
 }

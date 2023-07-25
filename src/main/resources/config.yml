@@ -1,3 +1,10 @@
+players:
+ elves: []
+ orcs: []
+ gnomes: []
+ humans: []
+ gods: []
+ demons: []
 race:
  elves:
   effects:
@@ -22,13 +29,6 @@ race:
    - INCREASE_DAMAGE
    - REGENERATION
    - INVISIBILITY
-players:
- elves: []
- orcs: []
- gnomes: []
- humans: []
- gods: []
- demons: []
 info:
  - elves
  - orcs
