@@ -15,4 +15,9 @@ public final class main extends JavaPlugin {
         config.options().copyDefaults(true);
         saveDefaultConfig();
     }
+
+    @Override
+    public  void onDisable(){
+        saveConfig();
+    }
 }

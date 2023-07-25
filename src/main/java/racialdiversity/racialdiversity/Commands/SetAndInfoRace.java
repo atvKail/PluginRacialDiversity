@@ -15,11 +15,12 @@ import java.util.List;
 
 public class SetAndInfoRace implements CommandExecutor {
     private final Plugin plugin = main.getPlugin(main.class);
-    private final List<String> race = plugin.getConfig().getStringList("info");
+    private List<String> race = plugin.getConfig().getStringList("info");
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         // Check command
+
         if ((Player) sender != null && args.length == 1 && command.getName().equalsIgnoreCase("race")) {
             Player pl = (Player) sender;
             String verdict = CheckPlayerInConfig(pl);
@@ -35,6 +36,10 @@ public class SetAndInfoRace implements CommandExecutor {
                             ChatColor.RED + "To choose a race.");
                 }
                 return true;
+            }
+            else if (args[0].equalsIgnoreCase("reload")){
+                race = plugin.getConfig().getStringList("info");
+                plugin.reloadConfig();
             }
             // Choose race
             else if (race.contains(args[0])) {
@@ -74,5 +79,8 @@ public class SetAndInfoRace implements CommandExecutor {
         tm2.add(playerName);
         plugin.getConfig().set(begin, tm1);
         plugin.getConfig().set(end, tm2);
+        plugin.getConfig().saveToString();
+        plugin.saveConfig();
+        plugin.reloadConfig();
     }
 }
