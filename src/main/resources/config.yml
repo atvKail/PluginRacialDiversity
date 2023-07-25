@@ -1,4 +1,4 @@
-racial:
+race:
  elves:
   effects:
    - NIGHT_VISION
@@ -8,28 +8,27 @@ racial:
    - SPEED
  orcs:
   effects:
-   - STRENGTH
+   - INCREASE_DAMAGE
  gnomes:
   effects:
    - LUCK
  gods:
   effects:
-   - INSTANT_HEAL
+   - HEALTH_BOOST
    - LUCK
    - WATER_BREATHING
  demons:
   effects:
-   - STRENGTH
-   - REGEN
+   - INCREASE_DAMAGE
+   - REGENERATION
    - INVISIBILITY
 players:
- elves:
-  - honses
- orcs:
- gnomes:
- humans:
- gods:
- demons:
+ elves: []
+ orcs: []
+ gnomes: []
+ humans: []
+ gods: []
+ demons: []
 info:
  - elves
  - orcs
@@ -37,3 +36,36 @@ info:
  - humans
  - gods
  - demons
+effectInfo:
+ - HERO_OF_THE_VILLAGE
+ - BAD_OMEN
+ - DOLPHINS_GRACE
+ - CONDUIT_POWER
+ - SLOW_FALLING
+ - UNLUCK
+ - LUCK
+ - LEVITATION
+ - GLOWING
+ - SATURATION
+ - ABSORPTION
+ - HEALTH_BOOST
+ - WITHER
+ - POISON
+ - WEAKNESS
+ - HUNGER
+ - NIGHT_VISION
+ - BLINDNESS
+ - INVISIBILITY
+ - WATER_BREATHING
+ - FIRE_RESISTANCE
+ - DAMAGE_RESISTANCE
+ - REGENERATION
+ - CONFUSION
+ - JUMP
+ - HARM
+ - HEAL
+ - INCREASE_DAMAGE
+ - SLOW_DIGGING
+ - FAST_DIGGING
+ - SLOW
+ - SPEED

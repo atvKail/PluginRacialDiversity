@@ -4,6 +4,15 @@ main: racialdiversity.racialdiversity.main
 api-version: 1.16
 author: 4e1owek
 commands:
-  racial:
-    name: /racial
-    use: /racial <humans|elves|orcs|gnomes>
+  race:
+    name: /race
+    use: /race <arg 1>
+    usage: /race <race | info>
+    description: Plugin to select a race, when a race is selected, effects specific to that race are given.
+    permission: CommonPlayer
+permissions:
+  admin:
+    default: op
+  CommonPlayer:
+    default: true
+

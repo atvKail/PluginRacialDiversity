@@ -1,7 +1,9 @@
 package racialdiversity.racialdiversity.Events;
 
 
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
@@ -16,16 +18,16 @@ import java.util.List;
 public class AddingEffect implements Listener {
     private final Plugin plugin = main.getPlugin(main.class);
     private final FileConfiguration config = plugin.getConfig();
-    private final List<String> racial = config.getStringList("info");
+    private final List<String> race = config.getStringList("info");
 
     @EventHandler
-    public void OnRespawn(PlayerRespawnEvent player){
+    public void OnMoved(PlayerMoveEvent player){
         Player pl = player.getPlayer();
         AddEffectPlayer(pl);
     }
     private String CheckPlayerInConfig(Player pl) {
         String p = pl.getName();
-        for (String v : racial) {
+        for (String v : race) {
             if (config.getStringList("players." + v).contains(p)) {
                 return v;
             }
@@ -34,13 +36,16 @@ public class AddingEffect implements Listener {
     }
 
     public boolean AddEffectPlayer(Player pl){
-        plugin.getLogger().info("loc");
         String verdict = CheckPlayerInConfig(pl);
         if(verdict != null){
-            List<String> effects = config.getStringList("racial." + verdict + ".effects");
+            List<String> effects = config.getStringList("race." + verdict + ".effects");
             for (String nameEffect : effects){
-                plugin.getLogger().info(nameEffect);
-                PotionEffect effect = new PotionEffect(PotionEffectType.getByName(nameEffect), 9999, 7);
+                if (PotionEffectType.getByName(nameEffect) == null){
+                    pl.sendMessage(ChatColor.RED + "add effect - ERROR, Racial plugin");
+                    return false;
+                }
+                PotionEffect effect = new PotionEffect(
+                        PotionEffectType.getByName(nameEffect), 10000, 1, false, false);
                 pl.addPotionEffect(effect);
             }
             return true;
