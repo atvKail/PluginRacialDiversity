@@ -15,7 +15,7 @@ import java.util.List;
 
 public class SetAndInfoRace implements CommandExecutor {
     private final Plugin plugin = main.getPlugin(main.class);
-    private List<String> race = plugin.getConfig().getStringList("info");
+    private final List<String> race = plugin.getConfig().getStringList("info");
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -37,10 +37,6 @@ public class SetAndInfoRace implements CommandExecutor {
                 }
                 return true;
             }
-            else if (args[0].equalsIgnoreCase("reload")){
-                race = plugin.getConfig().getStringList("info");
-                plugin.reloadConfig();
-            }
             // Choose race
             else if (race.contains(args[0])) {
                 // Remove Effect
@@ -54,6 +50,7 @@ public class SetAndInfoRace implements CommandExecutor {
                     List<String> tmp = plugin.getConfig().getStringList("players." + args[0]);
                     tmp.add(pl.getName());
                     plugin.getConfig().set("players." + args[0], tmp);
+                    plugin.saveConfig();
                 }
                 new AddingEffect().AddEffectPlayer(pl);
                 return true;
@@ -81,6 +78,5 @@ public class SetAndInfoRace implements CommandExecutor {
         plugin.getConfig().set(end, tm2);
         plugin.getConfig().saveToString();
         plugin.saveConfig();
-        plugin.reloadConfig();
     }
 }

@@ -14,10 +14,12 @@ public final class main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new AddingEffect(), this);
         config.options().copyDefaults(true);
         saveDefaultConfig();
+        this.reloadConfig();
     }
 
     @Override
     public  void onDisable(){
-        saveConfig();
+        this.reloadConfig();
+        this.saveConfig();
     }
 }
