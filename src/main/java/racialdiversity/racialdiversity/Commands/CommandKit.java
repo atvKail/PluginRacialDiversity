@@ -13,9 +13,9 @@ import racialdiversity.racialdiversity.main;
 import java.util.List;
 
 
-public class SetAndInfoRace implements CommandExecutor {
+public class CommandKit implements CommandExecutor {
     private final Plugin plugin = main.getPlugin(main.class);
-    private final List<String> race = plugin.getConfig().getStringList("info");
+    private List<String> race = plugin.getConfig().getStringList("info");
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -35,6 +35,14 @@ public class SetAndInfoRace implements CommandExecutor {
                             ChatColor.GREEN + "Use /racial <race> \n" +
                             ChatColor.RED + "To choose a race.");
                 }
+                return true;
+            }
+            // Reload
+            else if (args[0].equalsIgnoreCase("reload")){
+                plugin.reloadConfig();
+                plugin.saveConfig();
+                race = plugin.getConfig().getStringList("info");
+                sender.sendMessage(ChatColor.GREEN + "Reloaded");
                 return true;
             }
             // Choose race
@@ -76,7 +84,6 @@ public class SetAndInfoRace implements CommandExecutor {
         tm2.add(playerName);
         plugin.getConfig().set(begin, tm1);
         plugin.getConfig().set(end, tm2);
-        plugin.getConfig().saveToString();
         plugin.saveConfig();
     }
 }

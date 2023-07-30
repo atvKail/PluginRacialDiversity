@@ -2,7 +2,7 @@ package racialdiversity.racialdiversity;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
-import racialdiversity.racialdiversity.Commands.SetAndInfoRace;
+import racialdiversity.racialdiversity.Commands.CommandKit;
 import racialdiversity.racialdiversity.Events.AddingEffect;
 
 public final class main extends JavaPlugin {
@@ -10,7 +10,7 @@ public final class main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getCommand("race").setExecutor(new SetAndInfoRace());
+        getCommand("race").setExecutor(new CommandKit());
         getServer().getPluginManager().registerEvents(new AddingEffect(), this);
         config.options().copyDefaults(true);
         saveDefaultConfig();
